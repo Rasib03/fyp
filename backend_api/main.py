@@ -27,7 +27,7 @@ def read_root():
 
 
 @app.post("/analyze")
-async def analyze_image(file:UploadFile=File(...),x_api_key:str=Header(None)):
+async def analyze_image(file:UploadFile=File(...),x_api_key:str=Header(None,alias="x-api-key")):
 
     if x_api_key != api_key:
         return JSONResponse(content={"error": "Invalid API Key"}, status_code=401)
