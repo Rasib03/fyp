@@ -12,6 +12,21 @@ import os
 api_key = os.getenv("API_KEY")
 app = FastAPI()
 
+@app.get("/", response_class=HTMLResponse)
+def read_root():
+    return """
+    <html>
+        <head>
+            <title>Handwriting Analysis API</title>
+        </head>
+        <body>
+            <h1>Welcome to the Handwriting Analysis API</h1>
+            <p>Use the <code>/analyze</code> endpoint to analyze handwriting images.</p>
+        </body>
+    </html>
+    """
+
+
 @app.post("/analyze")
 async def analyze_image(file:UploadFile=File(...),x_api_key:str=Header(None)):
 
