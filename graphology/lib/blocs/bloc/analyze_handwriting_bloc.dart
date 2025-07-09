@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:graphology/models/response.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
@@ -25,7 +26,7 @@ class AnalyzeHandwritingBloc
     final request = http.MultipartRequest('POST', url);
 
     // Add the API key header
-    request.headers['x_api_key'] = 'iamrasib2003';
+    request.headers['x_api_key'] = dotenv.env['API_KEY'] ?? '';
 
     // Attach the image file
     request.files.add(await http.MultipartFile.fromPath('file', imagePath));

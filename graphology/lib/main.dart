@@ -5,8 +5,10 @@ import 'package:graphology/blocs/bloc/image_capture_bloc.dart';
 import 'package:graphology/blocs/bloc/internet_checker_bloc.dart';
 import 'package:graphology/views/home.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
