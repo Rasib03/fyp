@@ -2,10 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graphology/blocs/bloc/analyze_handwriting_bloc.dart';
 import 'package:graphology/blocs/bloc/internet_checker_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-Widget AnalyzeHandwriting(Size mq, XFile? image, BuildContext context) {
+Widget AnalyzeHandwritingWidget(Size mq, XFile? image, BuildContext context) {
   bool _isConnected = false;
   return BlocListener<InternetCheckerBloc, InternetCheckerState>(
     listener: (context, state) {
@@ -70,8 +71,11 @@ Widget AnalyzeHandwriting(Size mq, XFile? image, BuildContext context) {
                     ],
                   ),
                 );
+              } else {
+                context.read<AnalyzeHandwritingBloc>().add(
+                  AnalyzeHandwritingImageSelected(image!.path),
+                );
               }
-              
             },
             child: Material(
               elevation: 5,

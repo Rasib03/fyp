@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphology/blocs/bloc/image_capture_bloc.dart';
 
-Widget SelectOption(Size mq, BuildContext context) {
+Widget SelectOptionWidget(Size mq, BuildContext context) {
   return Center(
     child: Column(
       children: [

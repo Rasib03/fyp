@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphology/blocs/bloc/image_capture_bloc.dart';
 import 'package:graphology/blocs/bloc/internet_checker_bloc.dart';
+import 'package:graphology/views/analze_handwriting.dart';
 import 'package:graphology/views/camera_screen.dart';
-import 'package:graphology/widgets/analyze_handwriting.dart';
-import 'package:graphology/widgets/select_option.dart';
+import 'package:graphology/widgets/select_option_widget.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -67,26 +67,27 @@ class _HomeState extends State<Home> {
                     backgroundColor: Colors.green,
                   ),
                 );
+              } else if (state is ImageCapturedState) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        AnalyzeHandwriting(image: state.image),
+                  ),
+                );
+              } else if (state is ImageGalleryPicked && state.image != null) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        AnalyzeHandwriting(image: state.image),
+                  ),
+                );
               }
             },
           ),
         ],
         child: BlocBuilder<ImageCaptureBloc, ImageCaptureState>(
           builder: (context, captureState) {
-            if (captureState is ImageCapturedState) {
-              return AnalyzeHandwriting(
-                MediaQuery.sizeOf(context),
-                captureState.image,
-                context,
-              );
-            } else if (captureState is ImageGalleryPicked) {
-              return AnalyzeHandwriting(
-                MediaQuery.sizeOf(context),
-                captureState.image,
-                context,
-              );
-            }
-            return SelectOption(MediaQuery.sizeOf(context), context);
+            return SelectOptionWidget(MediaQuery.sizeOf(context), context);
           },
         ),
       ),
