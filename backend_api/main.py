@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Header,UploadFile,File
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
 import traits
 import get_features
 import features
